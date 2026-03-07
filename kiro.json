@@ -1,0 +1,29 @@
+{
+  "name": "vocal-guard",
+  "displayName": "Vocal Guard — Deepfake Audio Detector",
+  "version": "1.0.0",
+  "runtime": "python3.11",
+  "entrypoint": "backend/app.py",
+  "port": 8000,
+  "build": {
+    "commands": [
+      "pip install -r requirements.txt"
+    ]
+  },
+  "start": {
+    "command": "uvicorn backend.app:app --host 0.0.0.0 --port 8000"
+  },
+  "aws": {
+    "region": "ap-south-1",
+    "services": {
+      "compute": "elastic-beanstalk",
+      "platform": "Python 3.11",
+      "tier": "WebServer",
+      "instanceType": "t3.small"
+    }
+  },
+  "environment": {
+    "PORT": "8000"
+  },
+  "healthCheck": "/health"
+}
