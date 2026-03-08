@@ -34,13 +34,13 @@ app.add_middleware(
 detector = VocalGuardDetector()
 
 # Serve frontend static files
-frontend_path = os.path.join(os.path.dirname(__file__), "..", "frontend")
-app.mount("/static", StaticFiles(directory=frontend_path), name="static")
+frontend_path = os.path.join(os.path.dirname(__file__), "..")
+app.mount("/static", StaticFiles(directory=os.path.dirname(__file__)), name="static")
 
 
 @app.get("/")
 async def root():
-    return FileResponse(os.path.join(frontend_path, "index.html"))
+    return FileResponse(os.path.join(os.path.dirname(__file__), "index.html"))
 
 
 @app.get("/health")
